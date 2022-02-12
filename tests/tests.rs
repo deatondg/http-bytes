@@ -1,4 +1,6 @@
-use super::*;
+extern crate http_bytes;
+use http_bytes::*;
+
 #[test]
 fn request_roundtrip() {
     let q = b"GET / HTTP/1.1\r
@@ -21,7 +23,6 @@ user-agent: none\r
             .as_ref()
     );
 }
-
 
 #[test]
 #[cfg(feature="basicauth")]

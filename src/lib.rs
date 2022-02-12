@@ -413,8 +413,3 @@ pub fn response_header_to_vec<T>(r: &http::Response<T>) -> Vec<u8> {
     write_response_header(r, &mut c).unwrap();
     c.into_inner()
 }
-
-#[cfg(test)]
-mod fuzztest;
-#[cfg(test)]
-mod test;

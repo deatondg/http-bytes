@@ -1,6 +1,7 @@
 #![allow(unused)]
 #![warn(unused_must_use)]
-use super::*;
+extern crate http_bytes;
+use http_bytes::*;
 
 extern crate proptest;
 extern crate proptest_http;
@@ -10,7 +11,7 @@ use self::proptest::prelude::*;
 use self::proptest_http::request::RequestStrategy;
 use self::proptest_http::response::ResponseStrategy;
 
-fn compare_header_values(a: &HeaderValue, b:&HeaderValue) -> bool {
+fn compare_header_values(a: &http::HeaderValue, b:&http::HeaderValue) -> bool {
     std::str::from_utf8(&a.as_bytes()[..]).unwrap().trim()
     ==
     std::str::from_utf8(&b.as_bytes()[..]).unwrap().trim()
@@ -43,7 +44,7 @@ fn compare_headers(a: &http::header::HeaderMap, b:&http::header::HeaderMap) -> b
     return true;
 }
 
-fn compare_requests(a: &super::Request, b:&super::Request) -> bool {
+fn compare_requests(a: &http_bytes::Request, b:&http_bytes::Request) -> bool {
     use http::header::{HOST,AUTHORIZATION};
     let mut bh = b.headers().clone();
     // Remove extra Host and Authorization, which may be added by the framework
